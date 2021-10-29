@@ -1,0 +1,63 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends "layouts/base.html" %}
+{% block stylesheet %}
+img {
+opacity: 0.5;
+}
+{%endblock  %}
+{% block content %}
+
+<body style="background-image: url('/static/assets/img/c.jpg')"></body>
+<div class="main-content  mt-0"
+  style="background-image: url('/static/assets/img/grid.gif'); background-repeat: no-repeat; background-size: cover;  backdrop-filter: blur(1px)">
+  <div class="page-header align-items-start min-vh- pt-5 pb-11 m-3 border-radius-lg">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+    <div class="container rounded">
+      <div class="row justify-content-center">
+
+        <div class="col-lg-5 text-center mx-auto">
+          <img src="/static/assets/img/logo1.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container rounded" ;>
+    <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center ">
+      <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+        <div class="card z-index-650 rounded">
+
+          <!-- cool bottons paralax-->
+
+          <div class="card-body"
+            style="background: linear-gradient(-45deg, #101010, #2c3e50); box-shadow: 0 1.5rem 4rem rgba(255, 255, 255, 0.15); backdrop-filter: blur(2px);">
+            <div class="mb-1 rounded-circle">
+
+
+              <h1>{{ _('Sign In') }}</h1>
+              <div class="mb-3 d-inline-flex",style='justify-content-center'>
+
+                {{ wtf.quick_form(form, button_map={'submit': 'btn bg-gradient', 'checkbox': 'form-switch', 'form-check-input': 'form-check form-switch'}) }}
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</main>
+<br>
+
+</div>
+
+</p>
+
+</main>
+{% endblock %}

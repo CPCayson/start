@@ -1,0 +1,155 @@
+<!--
+=========================================================
+* * Black Dashboard Flask- v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard-flask
+* Copyright 2019 - present Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/static/assets/img/tigerclaw1.png">
+  <title>
+  Hive | {% block title %}{% endblock %} 
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/static/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/static/assets/demo/demo.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  <script src = "static/assets/js/jquery-1.3.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+  <link href="\node_modules\html5sortable\docs\basscss.css">
+
+   <script src="/static/assets/js/html5sortable.min.js"></script>
+  <link href="/static/assets/css/basscss.css">
+
+  <!-- Specific Page CSS goes HERE  -->
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body class="">
+  <div class="wrapper">
+
+    {% include 'includes/sidebar.html' %}
+
+    <div class="main-panel">
+
+      {% include 'includes/navigation.html' %}
+
+      <div class="content">
+
+        {% block content %}
+        <div class="container">
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-info" role="alert">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+          {% endwith %}
+
+          
+  
+        
+          {% block app_content %}{% endblock %}
+
+        {% endblock content %}
+
+      </div>
+
+      {% include 'includes/footer.html' %}
+
+    </div>
+    
+  </div>
+
+  {% include 'includes/fixed-plugin.html' %}
+
+  {% include 'includes/scripts.html' %}
+
+  {% include 'includes/scripts-sidebar.html' %}
+
+  <!-- Specific Page JS goes HERE  -->
+  {% block javascripts %}
+
+  <script>
+  $(function () {
+    var timer = null;
+    var xhr = null;
+    $('.user_popup').hover(
+        function(event) {
+            // mouse in event handler
+            var elem = $(event.currentTarget);
+            timer = setTimeout(function() {
+                timer = null;
+                xhr = $.ajax(
+                    '/user/' + elem.first().text().trim() + '/popup').done(
+                        function(data) {
+                            xhr = null;
+                            elem.popover({
+                                trigger: 'manual',
+                                html: true,
+                                animation: false,
+                                container: elem,
+                                content: data
+                            }).popover('show');
+                            flask_moment_render_all();
+                        }
+                    );
+            }, 1000);
+        },
+        function(event) {
+            // mouse out event handler
+            var elem = $(event.currentTarget);
+            if (timer) {
+                clearTimeout(timer);
+                timer = null;
+            }
+            else if (xhr) {
+                xhr.abort();
+                xhr = null;
+            }
+            else {
+                elem.popover('destroy');
+            }
+        }
+    );
+});
+</script>
+  
+  
+  
+  {% endblock javascripts %}
+
+</body>
+
+</html>

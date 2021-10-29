@@ -1,0 +1,48 @@
+
+
+    <div class="sidebar">
+
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a target="_blank" rel="sponsored noopener noreferrer" 
+             href="#" class="simple-text logo-normal">
+            MEM2 Display
+          </a>
+        </div>
+
+        <ul class="nav nav_tabs">
+
+          {% if current_user.is_authenticated %}
+        
+          <li>
+            <a target="_blank" href="amazon.tigerdocs.wiki.com" >
+              <i class="tim-icons icon-cloud-download-93"></i>
+              <p>Visit the Tiger Docs (comingsoon) </p>
+            <a target="_blank" href="localhost:5000/clock" >
+              <i class="tim-icons icon-cloud-download-93"></i>
+              <p>The Hub</p>
+            </a>
+        
+
+            <a target="_blank" href="localhost:5000/slide" >
+              <i class="tim-icons icon-cloud-download-93"></i>
+              <p>The Grid</p>
+            </a>
+
+
+            <a target="_blank" href="localhost:5000/slide" >
+              <i class="tim-icons icon-cloud-download-93"></i>
+              <p>6-Sigma (coming soon)</p>
+            </a>
+          <a target="_blank" href="localhost:5000/wash" >
+            <i class="tim-icons icon-cloud-download-93"></i>
+            <p>Wash Buddy (coming soon)</p>
+          </a>
+        </li>              
+          {% endif %}
+
+        </ul>
+
+      </div>
+	  
+    </div>

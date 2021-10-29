@@ -1,0 +1,88 @@
+
+
+{% block stylesheets %}
+
+<link href="static/assets/plugin/ce-2.1.0/dist/css/jquery.jexcel.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="static/assets/plugin/ce-2.1.0/dist/js/jquery.jexcel.js"></script>
+
+
+<link rel="stylesheet" href="static/assets/plugin/ce-2.1.0/dist/css/jquery.jdropdown.min.css" />
+<script src="static/assets/plugin/ce-2.1.0/dist/js/jquery.jdropdown.js"></script>
+
+<!-- Calendar picker -->
+<link rel="stylesheet" href="static/assets/plugin/ce-2.1.0/dist/css/jquery.jcalendar.css" />
+<script src="static/assets/plugin/ce-2.1.0/dist/js/jquery.jcalendar.js"></script>
+
+<!-- CSV -->
+<script src="static/assets/plugin/ce-2.1.0/dist/js/jquery.csv.min.js"></script>
+
+<!-- Formula -->
+<script src="static/assets/plugin/ce-2.1.0/dist/js/excel-formula.min.js"></script>
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+<div id="demo1"></div>
+<div id="demo2"></div>
+<div id="demo3"></div>
+
+<br>
+<br>
+
+{% include 'atlas.html' %}
+
+{% endblock  %}
+
+{% block javascripts %}
+<script>
+
+data1 = [
+['Goal', 'Prior Week', 'Actual', 'bridge'],
+  ['OB FPY', 17500, 807.80],
+  ['PACK FPY', 20000, 116.52],
+  ['Sort Error Indicator', 1500, 38.66], 
+ ['Pack Item Missing', 2000, 38.66],
+
+
+  ['Wrong Box', 3000, 38.66],
+  ['Pack Slam Kickout', 18000, 38.66],
+  ['OB Psolve Missing Tote', 15000, 38.66],
+  ['OB Psolve Overage', 2,500, 38.66, 'three totes were missed out due to being in transit and never dropped in pack dropzone.']
+];
+
+
+data2= [
+['CPTS', 'GOAL', 'SLAM PAD', 'TRUCK', 'BRIDGE'],
+  ['1030/2300', 0, 0, 0],
+  ['1500/0400',  0, 0, 0],
+  ['1730',  0, 0, 0],
+
+];
+
+data3= [
+['Bridge for Missing', 'Bridge for Wrong Box', 'Bridge for PS', 'Bridge for Packsupport'],
+  ['1030/2300', 0, 0, 0],
+  ['1500/0400',  0, 0, 0],
+  ['1730',  0, 0, 0],
+
+];
+
+jQuery(document).ready(function($){
+
+$('#demo1').jexcel({ 
+  data:data1,
+});
+$('#demo2').jexcel({ 
+  data:data2,
+});
+$('#demo3').jexcel({ 
+  data:data3,
+});
+});
+
+</script>
+
+
+{% endblock javascripts %}

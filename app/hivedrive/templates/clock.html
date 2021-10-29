@@ -1,0 +1,1560 @@
+{% extends "layouts/base.html"%}
+{% block stylesheets %}
+
+
+
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script src="static/assets/js/application.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="static/assets/js/jquery.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<style> 
+
+body {
+  margin-top: 35px;
+}
+h1 {
+  text-align: center;
+  color: #3d3d3d;
+  font-family: "Oswald";
+  font-weight: 700;
+  font-size: 1em;
+  margin: 0 25%;
+  border-top: .1em solid;
+  border-bottom: .1em solid;
+}
+
+
+
+
+
+
+@import url(https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ddd;
+  font-family: "Source Sans Pro";
+  font-weight: 300;
+}
+
+.Message {
+  display: table;
+  position: relative;
+  margin: 40px auto 0;
+  width: 500px;
+  background-color: #0074D9;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+.Message.is-hidden {
+  opacity: 0;
+  height: 0;
+  font-size: 0;
+  padding: 0;
+  margin: 0 auto;
+  display: block;
+}
+
+.Message--orange {
+  background-color: #F39C12;
+}
+
+.Message--red {
+  background-color: #FF4136;
+}
+
+.Message--green {
+  background-color: #2ECC40;
+}
+
+.Message-icon {
+  display: table-cell;
+  vertical-align: middle;
+  width: 60px;
+  padding: 30px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.Message-icon > i {
+  width: 20px;
+  font-size: 20px;
+}
+
+.Message-body {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 30px 20px 30px 10px;
+}
+.Message-body > p {
+  line-height: 1.2;
+  margin-top: 6px;
+}
+
+.Message-button {
+  position: relative;
+  margin: 15px 5px -10px;
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 3px rgba(0, 0, 0, 0.4);
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-family: "Source Sans Pro";
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+.Message-button:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+.Message-button:active {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0px rgba(0, 0, 0, 0.4);
+  top: 3px;
+}
+
+.Message-close {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  right: 5px;
+  top: 5px;
+  opacity: 0;
+  cursor: pointer;
+}
+.Message:hover .Message-close {
+  opacity: 1;
+}
+.Message-close:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.u-italic {
+  font-style: italic;
+}
+
+#leftCol {
+    position: fixed;
+    width: 400px;
+    background-color: #DDD; 
+    font-size: 21px;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+}
+#content {
+    position: relative;            
+    margin-left: 150px;
+}
+    /* FontAwesome for working BootSnippet :> */
+    @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    #team {
+    background: #eee !important;
+    }
+
+
+    @import url('https://fonts.googleapis.com/css?family=Abel');
+
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgb(2, 1, 1);
+}
+
+.button-group {
+  margin: 15px 0;
+}
+.button-group .button {
+  display: inline-block;
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 1px;
+}
+.button-group .button:first-child {
+  border-radius: 0.5em 0 0 0.5em;
+}
+.button-group .button:last-child {
+  border-radius: 0 0.5em 0.5em 0;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  background: #e6e6e6;
+  border: none;
+  color: #222;
+  font-family: sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #333;
+  color: #fff;
+}
+.button:active, .button.is-checked {
+  background-color: #151515;
+}
+.button.is-checked {
+  color: #fff;
+}
+
+.input-group {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.quicksearch {
+  border: 0;
+  background: #f6f6f6;
+  box-shadow: none;
+  border-bottom: 3px solid #ddd;
+  width: 100%;
+  padding: 20px 15px;
+  font-size: 14px;
+}
+.quicksearch:active, .quicksearch:focus {
+  background: #e6e6e6;
+  border-color: #151515;
+  box-shadow: none;
+  outline: none;
+}
+
+.quicksort .quicksort1 {
+  width: 50px;
+  height: 43px;
+  margin: 15px 0;
+  display: table;
+  text-align: center;
+  font-size: 20px;
+  background: #e6e6e6;
+  color: #151515;
+  border-radius: 0.5em;
+  font-weight: normal;
+  text-decoration: none;
+}
+.quicksort i {
+  width: 100%;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+.quicksort:hover {
+  color: #fff;
+  background: #222;
+  text-decoration: none;
+}
+
+.element-item {
+  position: relative;
+  float: right;
+  width: 200px;
+  height:300px;
+  text-align: center;
+
+  margin: 90px;
+  padding: 50px;
+  background: #888;
+  color: rgb(2, 1, 1);
+  font-weight: bold;
+  text-align: left;
+
+
+}
+.element-item span {
+
+  text-align: center;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+    .element-item > * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .element-item .name {
+      top: 60px;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 12px;
+      font-weight: normal;
+    }
+    
+    .element-item .symbol {
+      position: absolute;
+      left: 10px;
+      top: 0px;
+      font-size: 42px;
+      font-weight: bold;
+      color: white;
+    }
+    
+    .element-item .number {
+      position: absolute;
+      right: 8px;
+      top: 5px;
+    }
+    
+    .element-item .weight {
+      position: absolute;
+      left: 10px;
+      top: 76px;
+      font-size: 12px;
+    }
+
+.element-item.Other {
+  background: #ff077b;
+}
+.element-item.Rebin {
+  background: #6416ad2a;
+}
+.element-item.Line-4 {
+  background: #07ff13;
+}
+.element-item.Line-3 {
+  background:#17a2b8;
+}
+.element-item.Line-2 {
+  background: #e9c9e5c4;
+}
+.element-item.Line-1 {
+  background: #0077ff;
+}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:600,300);
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -50px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  background: #CA7C4E;
+  background: linear-gradient(to top right, #EEBE6C 0%, #CA7C4E 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#EEBE6C", endColorstr="#CA7C4E",GradientType=1 );
+  color: #786450;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.center {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  height: 300px;
+  width: 320px;
+  background: #fff;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+.profile {
+  float: left;
+  width: 200px;
+  height:400px;
+  text-align: center;
+}
+.profile .image {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin: 20px auto 0 auto;
+}
+.profile .image .circle-1, .profile .image .circle-2 {
+  position: absolute;
+  box-sizing: border-box;
+  width: 76px;
+  height: 76px;
+  top: -3px;
+  left: -3px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #786450 #786450 #786450 transparent;
+  border-radius: 50%;
+  transition: all 1.5s ease-in-out;
+}
+.profile .image .circle-2 {
+  width: 82px;
+  height: 82px;
+  top: -6px;
+  left: -6px;
+  border-color: #786450 transparent #786450 #786450;
+}
+.profile .image img {
+  display: block;
+  border-radius: 50%;
+}
+.profile .image:hover {
+  cursor: pointer;
+}
+.profile .image:hover .circle-1, .profile .image:hover .circle-2 {
+  transform: rotate(360deg);
+}
+.profile .image:hover .circle-2 {
+  transform: rotate(-360deg);
+}
+.profile .name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.profile .job {
+  font-size: 11px;
+  line-height: 15px;
+}
+.profile .actions {
+  margin-top: 13px;
+}
+.profile .actions .btn {
+  display: block;
+  width: 120px;
+  height: 30px;
+  margin: 0 auto 10px auto;
+  background: none;
+  border: 1px solid #6f5078;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  color: #786450;
+}
+.profile .actions .btn:hover {
+  background: #786450;
+  color: #fff;
+}
+
+.stats {
+  float: left;
+}
+.stats .box {
+  box-sizing: border-box;
+  width: 120px;
+  height: 99px;
+  background: #F5E8DF;
+  text-align: center;
+  padding-top: 28px;
+  transition: all 0.4s ease-in-out;
+}
+.stats .box:hover {
+  background: #E1CFC2;
+  cursor: pointer;
+}
+.stats .box:nth-child(2) {
+  margin: 1px 0;
+}
+.stats span {
+  display: block;
+}
+.stats .value {
+  font-size: 18px;
+  font-weight: 600;
+}
+.stats .parameter {
+  font-size: 11px;
+}
+.hidden {
+  display: none;
+}
+
+form > .row {
+  margin-bottom: 20px;
+}
+
+form > .row:last-child {
+  margin-bottom: 0;
+}
+
+form input.invalid {
+  border-color: #dc3545;
+}
+
+form .invalid-feedback {
+  color: #dc3545;
+  font-size: 14px;
+  line-height: 21px;
+  margin-top: 4px;
+  text-align: left;
+}
+font-family: 'Oswald', sans-serif;
+
+html { 
+  font-size: 62.5%; } 
+body {
+font-size: 1.5em;
+line-height: 1.6;
+font-weight: 400;
+font-family: 'lux', sans-serif;
+color: #222;
+background-color: #f6f6f6;
+overflow-y: scroll;
+}
+
+
+/* Typography
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+h1, h2, h3, h4, h5, h6 { 
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 2rem; }
+h1 { font-size: 4.0rem; line-height: 1.2;  letter-spacing: -.1rem;}
+h2 { font-size: 3.6rem; line-height: 1.25; letter-spacing: -.1rem; }
+h3 { font-size: 3.0rem; line-height: 1.3;  letter-spacing: -.1rem; }
+h4 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem; }
+h5 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -.05rem; }
+h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
+
+/* Larger than phablet */
+@media (min-width: 550px) {
+  h1 { font-size: 5.0rem; }
+  h2 { font-size: 4.2rem; }
+  h3 { font-size: 3.6rem; }
+  h4 { font-size: 3.0rem; }
+  h5 { font-size: 2.4rem; }
+  h6 { font-size: 1.5rem; }
+}
+
+p {
+  margin-top: 0; }
+
+* {
+box-sizing: border-box;
+margin: 0;
+}
+
+section.intro {
+font-family: oswald;
+position: relative;
+height: 100vh;
+width: 100%;
+background: #f6f6f6;
+background: -moz-radial-gradient(center, ellipse cover, #f6f6f6 1%, #d3d3d3 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#f6f6f6), color-stop(100%,#d3d3d3));
+/* background: -webkit-radial-gradient(center, ellipse cover, #f6f6f6 1%,#d3d3d3 100%); */
+background: -o-radial-gradient(center, ellipse cover, #f6f6f6 1%,#d3d3d3 100%);
+background: -ms-radial-gradient(center, ellipse cover, #f6f6f6 1%,#d3d3d3 100%);
+/* background: radial-gradient(ellipse at center, #f6f6f6 1%,#d3d3d3 100%); */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#d3d3d3',GradientType=1 );
+overflow: hidden;
+z-index: 1;
+}
+
+
+
+
+.employee-info-collapsed {
+    display: grid;
+    grid-template-columns: 70px 2fr 2fr;
+    grid-template-rows: 30px 20px;
+    grid-template-areas: "picture header actions""picture subheaderSimple subheaderSimple"
+}
+
+.employee-info-picture {
+    grid-area: picture;
+    margin: 0 15px
+}
+
+.employee-info-picture-collapsed {
+    grid-area: picture;
+    margin: 0 15px;
+    max-height: 50px;
+    padding: 0
+}
+
+.employee-info-header {
+    grid-area: header
+}
+
+.employee-info-header-small {
+    font-size: 20px
+}
+
+.employee-info-subheader-simple {
+    grid-area: subheaderSimple;
+    display: inline
+}
+
+.employee-info-actions {
+    grid-area: actions;
+    justify-self: right
+}
+
+.employee-info-separator {
+    grid-area: separator
+}
+
+.employee-info-data-table {
+    grid-area: dataTable
+}
+
+.employee-location-details-popover-frame {
+    max-width: 580px;
+    width: 580px
+}
+
+.employee-location-details-popover {
+    margin: -5px -10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: normal
+}
+
+.employee-location-details-summary {
+    padding: 3px;
+    border-bottom: 1px solid #ccc;
+    font-weight: 700
+}
+
+.employee-location-details-summary-item {
+    padding: 5px;
+    line-height: 1.3
+}
+
+.employee-location-details-data {
+    padding: 3px
+}
+
+
+
+
+
+.welcome {
+font-size: 60px;
+text-align: center;
+color: #333;
+}
+
+
+/* Variables */
+:root {
+	--color-periwinkle: #504aa0;
+	--color-periwinkle2: #353595;
+	--color-watermelon: #ed3664;
+	--color-watermelon2: #ee1b46;
+	--color-paris-green: #60c3a6;
+	--color-paris-green2: #09b17d;
+	--color-canary-yellow: #fcca0b;
+	--color-canary-yellow2: #f6a91b;
+	--color-white: #fff;
+	--color-indigo: #25265d;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.square-text {
+	font-size: 30px;
+	text-align: center;
+	margin-bottom: 20px;
+	color: var(--color-indigo);
+	
+	margin-top: 3rem;
+}
+
+.square-container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	
+	transition: all .2s;
+}
+
+.square__link {
+	text-decoration: none !important;
+}
+
+.square {
+	width: 125px;
+	height: 125px;
+	text-transform: uppercase;
+	color: white;
+	font-size: 23px;
+	font-weight: 600;
+	margin: 10px;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.square:hover {
+	cursor: pointer;
+	
+	-webkit-animation-name: wiggle;
+  -ms-animation-name: wiggle;
+  -ms-animation-duration: 1000ms;
+  -webkit-animation-duration: 1000ms;
+  -webkit-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+  -ms-animation-timing-function: ease-in-out;
+}
+
+/* Square colors */
+.square-g {
+	background-color: var(--color-periwinkle);
+}
+
+.square-g:hover {
+	background-color: var(--color-periwinkle2);
+	
+}
+
+.square-r {
+	background-color: var(--color-watermelon);
+}
+
+.square-r:hover {
+	background-color: var(--color-watermelon2);
+}
+
+.square-o {
+	background-color: var(--color-paris-green);
+}
+
+.square-o:hover {
+	background-color: var(--color-paris-green2);
+}
+
+.square-w {
+	background-color: var(--color-canary-yellow);
+}
+
+.square-w:hover {
+	background-color: var(--color-canary-yellow2);
+}
+
+/* Animation =====================================*/
+/* Wiggle */
+@-webkit-keyframes wiggle {
+	0% { -webkit-transform: rotate(5deg); }
+	25% { -webkit-transform: rotate(-5deg); }
+	50% { -webkit-transform: rotate(10deg); }
+	75% { -webkit-transform: rotate(-2.5deg); }
+	100% { -webkit-transform: rotate(0deg); }
+}
+
+@-ms-keyframes wiggle {
+	0% { -ms-transform: rotate(10deg); }
+	25% { -ms-transform: rotate(-10deg); }
+	50% { -ms-transform: rotate(20deg); }
+	75% { -ms-transform: rotate(-5deg); }
+	100% { -ms-transform: rotate(0deg); }
+}
+
+@keyframes wiggle {
+	0% { transform: rotate(10deg); }
+	25% { transform: rotate(-10deg); }
+	50% { transform: rotate(20deg); }
+	75% { transform: rotate(-5deg); }
+	100% { transform: rotate(0deg); }
+}
+
+
+
+
+/********************************************************************************************************************************
+                                            Hexagon Intro Blocks
+********************************************************************************************************************************/
+.intro-block {
+position: relative;
+display: flex;
+align-items: center;
+height: 100%;
+box-shadow: inset 0px 0px 64px 0px rgba(50,50,50,0.75);
+}
+
+.hex-bg-big-text {
+position: absolute;
+z-index: -1;
+height: 100%;
+width: 100%;
+}
+
+.centerfold-wrap {
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+flex: 1;
+}
+
+.hoverblock {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+.hover-notify {
+position: absolute;
+bottom: -80px;
+left: 0;
+width: 100%;
+text-align: center;
+font-size: 50px;
+}
+
+.code-display {
+position: relative;
+color: #f6f6f6;
+width: 600px;
+height: 260px;
+}
+
+.code-display::before {
+content: "Expertise";
+position: absolute;
+top: -70px;
+left: 0;
+font-size: 3.0rem;
+color: #333;
+}
+
+.code-display h1 {
+color: #333;
+}
+
+.code-description {
+width: 100%;
+height: 100%;
+color: #333;
+}
+
+.code-description * {
+display: none;
+}
+
+.code-description > div {
+padding: 0px 40px;
+font-size: 26px;
+border-left: 2px solid #DDDDDD;
+}
+
+.desc-active {
+display: block;
+/*height: 100%;*/
+position: relative;
+}
+
+.desc-active > p {
+display: block;
+margin: 0;
+}
+
+.desc-active > p > span {
+display: inline-block;
+/* font-weight: bold; */
+width: 125px;
+}
+
+p.code-title {
+position: relative;
+font-size: 6rem;
+}
+
+.desc-active::after {
+position: absolute;
+height: 100%;
+width: 100%;
+top: 0;
+left: 0;
+content: "";
+opacity: .2;
+z-index: -1;
+}
+
+.backend-desc.desc-active::after {
+background: url(https://i.imgur.com/Dc8HgeM.png);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: right center;
+}
+
+.frontend-desc.desc-active::after {
+background: url(https://i.imgur.com/QcfXSkf.jpg);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: right center;
+}
+
+.html-desc.desc-active::after {
+background: url(https://i.imgur.com/0g3HZSF.jpg);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: right center;
+}
+
+.css-desc.desc-active::after {
+background: url(https://i.imgur.com/poC0TYE.png);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: right center;
+}
+
+.javascript-desc.desc-active::after {
+background: url(https://i.imgur.com/QjrmHkb.jpg);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: right center;
+}
+
+.gui-desc.desc-active::after {
+background: url(https://i.imgur.com/YmCqPpk.jpg);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: right center;
+}
+
+.seo-desc.desc-active::after {
+background: url(https://i.imgur.com/V9vAVUO.png);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: right center;
+}
+
+
+
+
+
+
+
+
+
+
+
+.sliders { padding: 15px 0 30px 0; }
+.filter-section .filter-label {
+  display: block;
+  font-weight: bold;
+}
+.bootstrap-slider .slider-selection { background: #2175b0; }
+
+
+
+.hex-master-wrap {
+position: relative;
+/* width: 50%; */
+min-width: 665px;
+height: 460px;
+}
+
+.border-1,
+.border-2,
+.border-3 {
+position: absolute;
+width: 100%;
+height: 88px;
+top: 46px;
+left: 0;
+border-left: 3px solid;
+border-right: 3px solid;
+border-radius: 8px;
+z-index: 2;
+border-color: #333;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+}
+
+.border-2 {
+transform: rotate(60deg);
+}
+
+.border-3 {
+transform: rotate(120deg);
+}
+
+.border-3::before {
+display: none;
+position: absolute;
+content: "";
+bottom: 10%;
+left: 42px;
+width: 50%;
+height: 83%;
+background-color: rgba(255, 255, 255, 0);
+border-top: 1px solid;
+border-bottom: 1px solid;
+border-color: white;
+border-radius: 50%;
+visibility: visible;
+z-index: -1;
+/* transform: rotate(60deg); */
+}
+
+
+
+
+
+
+.intro-block .grid-1,
+.intro-block .grid-2,
+.intro-block .grid-3 {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 75%;
+margin: 0 auto;
+margin-bottom: -50px;
+}
+
+.intro-block .grid-3 {
+margin-bottom: -50px;
+}
+
+.intro-block .grid-2,
+.intro-block .grid-3 {
+margin-top: -50px;
+}
+
+.employee-info-full {
+    display: grid;
+    grid-template-columns: 160px 2fr 2fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "picture header actions" "picture separator separator" "picture dataTable dataTable";
+}
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.employee-info-picture {
+    grid-area: picture;
+    margin: 0 15px
+}
+
+.employee-info-picture-collapsed {
+    grid-area: picture;
+    margin: 0 15px;
+    max-height: 50px;
+    padding: 0
+}
+
+.employee-info-header {
+    grid-area: header
+}
+
+.employee-info-header-small {
+    font-size: 20px
+}
+
+.employee-info-subheader-simple {
+    grid-area: subheaderSimple;
+    display: inline
+}
+
+.employee-info-actions {
+    grid-area: actions;
+    justify-self: right
+}
+
+.employee-info-separator {
+    grid-area: separator
+}
+
+.employee-info-data-table {
+    grid-area: dataTable
+}
+
+.circular-menu {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+}
+
+.circle {
+  width: 250px;
+  height: 250px;
+  opacity: 0;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+   
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  transform: scale(0);
+
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.open.circle {
+  opacity: 1;
+  
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+}
+
+.circle a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  height: 40px;
+  width: 40px;
+  line-height: 70px;
+  margin-left: -15px;
+  margin-top: -40px;
+  position: absolute;   
+}
+
+.circle a:hover {
+  color: gray;
+}
+
+.menu-button {
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  text-decoration: none;
+  text-align: center;
+  color: #444;
+  border-radius: 50%;
+  display: block;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  padding: 10px;
+  background: rgb(0, 0, 0);
+}
+
+.menu-button:hover {
+  background-color: rgb(15, 15, 44);
+}
+
+
+.apexcharts-tooltip {
+    background: #0c0303;
+    color: orange;
+    width: 300;
+    width: 150px;
+    border: 1px solid black;
+  }
+</style>
+{% endblock stylesheets %}
+{% block content %}
+
+<body>
+  
+
+
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="d-flex justify-content-between align-items-center breaking-news bg-white">
+              <div class="d-flex flex-row flex-grow-1 flex-fill justify-content-center bg-danger py-2 text-white px-1 news"><span class="d-flex align-items-center">&nbsp;MEM2 stats</span></div>
+              <marquee class="news-scroll" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">  <a href="#">Automated Testing.................. Automated Testing......... TPH Needed:........  34,   .......   now: '{{(jt.actualrate[119])}}' </a> </marquee>
+          </div>
+      </div>
+  </div>
+</div>
+
+  {% include 'includes/commandnav.html' %}
+
+  <div id="chart"></div>
+  <iframe src="http://127.0.0.1:5000/syncchart" width="800" height="684" style="border:0" allowfullscreen></iframe>
+  <iframe src='http://127.0.0.1:5000/last' width="800" height="684" style="border:0" allowfullscreen></iframe>
+
+  <div id="tabs">
+    <ul class="nav nav-tabs" id="prodTabs">
+        <li class="active"><a href="#tab_basic">Basic</a></li>
+        <li><a href="#Kibana" data-url="/atlas">Kibana</a></li>
+        <li><a href="#MEM2_training_mp4" data-url="/train">Videos</a></li>
+        <li><a href="#docs" data-url="/docs">Training Docs</a></li>
+        <li><a href="#igraphs" data-url="/igraph">Igraph</a></li> 
+
+
+    </ul>
+    <div class="tab-content">
+        <div id="tab_basic" class="tab-pane active"></div>
+        <div id="Kibana" class="tab-pane active"></div>
+        <div id="MEM2_training_mp4" class="tab-pane active"></div>
+        <div id="docs" class="tab-pane active"></div>
+        <div id="igraphs" class="tab-pane active"></div>
+
+
+    </div>
+
+    {% include 'adaptshit.html' %}
+
+</div>
+
+</body>
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+
+$('#tabs').on('click','.tablink,#prodTabs a',function (e) {
+    e.preventDefault();
+    var url = $(this).attr("data-url");
+
+    if (typeof url !== "undefined") {
+        var pane = $(this), href = this.hash;
+
+        // ajax load from data-url
+        $(href).load(url,function(result){      
+            pane.tab('show');
+        });
+    } else {
+        $(this).tab('show');
+    }
+});
+var today = new Date();
+
+
+if (today.getHours() <= 10)
+console.log('Q1')
+var sla1 = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 10, 0, 0)
+
+if (today.getHours() <= 12)
+console.log('Q2')
+var sla1 = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 11, 37, 0)
+
+
+if (today.getHours() <= 3)
+console.log('Q3')
+var sla1 = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 14, 37, 0)
+
+
+if (today.getHours() <= 6)
+console.log('Q4')
+var sla1 = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 17, 7, 0)
+
+
+var sla = new Date(sla1).getTime();
+// set the date we're counting down to
+
+
+// variables for time units
+var  hours, minutes, seconds;
+ 
+// get tag element
+var countdown = document.getElementById("countdown");
+
+
+
+
+// update the tag with id "countdown" every 1 second
+setInterval(function () {
+
+
+var cur = new Date().getTime();
+
+ 
+    // find the amount of "seconds" between now and target
+var seconds_left = (sla - cur)/1000;
+    
+ 
+    // do some time calculations
+    seconds_left = seconds_left % 86400-18000;
+     
+    hours = parseInt(seconds_left / 3600);
+    seconds_left = seconds_left % 3600;
+     
+    minutes = parseInt(seconds_left / 60);
+    seconds = parseInt(seconds_left % 60);
+    // format countdown string + set tag value
+    countdown.innerHTML =  hours + "h "
+    + minutes + "m " + seconds + "s ";  
+ 
+}, 1000);
+
+
+</script>
+<script>
+
+
+    function closeMessage(el) {
+        el.addClass('is-hidden');
+      }
+      
+      $('.js-messageClose').on('click', function(e) {
+        closeMessage($(this).closest('.Message'));
+      });
+      
+      $('#js-helpMe').on('click', function(e) {
+        alert('Help you we will, young padawan');
+        closeMessage($(this).closest('.Message'));
+      });
+      
+      $('#js-authMe').on('click', function(e) {
+        alert('Okelidokeli, requesting data transfer.');
+        closeMessage($(this).closest('.Message'));
+      });
+      
+      $('#js-showMe').on('click', function(e) {
+        alert("You're off to our help section. See you later!");
+        closeMessage($(this).closest('.Message'));
+      });
+      
+      $(document).ready(function() {
+        setTimeout(function() {
+          closeMessage($('#js-timer'));
+        }, 5000);
+      });
+        
+
+
+
+      var options = {
+
+
+series: [{
+    data: [{
+            x: 'Singles',
+            y: 150,
+            a: '{{(jt.actualhour[104])}}',
+            b: '{{(jt.actualvolume[104])}}',
+            c: '{{(jt.actualrate[104])}}',
+            d: '<div id="log1">',
+            e: '{{(jt.actualrate[104])}}',
+            f: '{{(jt.actualrate[104])}}'
+
+
+        },
+        {
+            x: 'multis',
+            y: 149,
+            a: '{{(jt.actualhour[109])}}',
+            b: '{{(jt.actualvolume[109])}}',
+            c: '{{(jt.actualrate[109])}}',
+            d: '<div id="log2">',
+            e: 'Wrong Box {{(jt.actualrate[104])}}',
+            f: '{{(jt.actualrate[104])}}'
+        },
+        {
+            x: 'Sort',
+            y: 50,
+            a: '{{(jt.actualhour[84])}}',
+            b: '{{(jt.actualvolume[84])}}',
+            c: '{{(jt.actualrate[84])}}',
+            d: '<div id="log3">',
+            e: '{{(jt.actualrate[104])}}',
+            f: '{{(jt.actualrate[104])}}'
+        },
+        {
+            x: 'Support',
+            y: 50,
+            a: '{{(jt.actualhour[110] )}}',
+            b: '{{(jt.actualvolume[110])}}',
+            c: '{{(jt.actualrate[110])}}',
+            d: '<div id="log4">',
+            e: '{{(jt.actualrate[104])}}',
+            f: '{{(jt.actualrate[104])}}'
+        },
+        {
+            x: 'Ob lead',
+            y: 50,
+            a: '{{(jt.actualhour[116])}}',
+            b: '{{(jt.actualvolume[116])}}',
+            c: '{{(jt.actualrate[116])}}',
+            d: '<div id="log5">',
+            e: '{{(jt.actualrate[104])}}',
+            f: '{{(jt.actualrate[104])}}'
+        },
+        {
+            x: 'PS',
+            y: 84,
+            a: '{{(jt.actualhour[117])}}',
+            b: '{{(jt.actualvolume[117])}}',
+            c: '{{(jt.actualrate[117])}}',
+            d: '<div id="log6">',
+            e: '{{(jt.actualrate[104])}}',
+            f: '{{(jt.actualrate[104])}}'
+        },
+
+
+    ]
+}],
+legend: {
+    show: false
+},
+tooltip: {
+    custom: function ({
+        series,
+        seriesIndex,
+        dataPointIndex,
+        w
+    }) {
+        var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+
+        return '<ul>' +
+            '<li ><p  style="background-color:black;"><b>Updated</b><br>: ' + '{{rd.get('update')}}' + '</p></li>' +
+            '<li ><p  style="background-color:black;"><b>Hours</b>: ' + data.a + '</p></li>' +
+            '<li><b><p  style="background-color:black;">Volume</b>: ' + data.b + '</p></li>' +
+            '<li><b><p  style="background-color:black;">Rate</b>:' + data.c + '</p></li><hr>'+
+      
+
+
+
+
+
+
+
+        '</ul>';
+    },
+},
+chart: {
+    height: 350,
+    type: 'treemap'
+},
+title: {
+    text: 'Section Pack',
+    align: 'center'
+},
+colors: [
+    '#3B93A5',
+    '#F7B844',
+    '#ADD8C7',
+    '#EC3C65',
+    '#CDD7B6',
+    '#C1F666',
+    '#D43F97',
+    '#1E5D8C',
+    '#421243',
+    '#7F94B0',
+    '#EF6537',
+    '#C0ADDB'
+],
+plotOptions: {
+    treemap: {
+        distributed: true,
+        enableShades: false
+    }
+}
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+</script>
+<script type="text/javascript">
+
+
+
+var options = {
+  series: [{data: JSON.parse('{{s}}')}],
+  chart: {
+    id: 'fb',
+    group: 'social',
+    type: 'line',
+    height: 160
+  },
+  colors: ['#008FFB']
+
+}
+
+var chartd = new ApexCharts(document.querySelector("#chart-line"), options);
+chartd.render();
+
+var optionsLine2 = {
+  series: [{
+    data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+      min: 10,
+      max: 30
+    })
+  }],
+  chart: {
+    id: 'tw',
+    group: 'social',
+    type: 'line',
+    height: 160
+  },
+  colors: ['#546E7A']
+};
+
+var chartLine2 = new ApexCharts(document.querySelector("#chart-line2"), optionsLine2);
+chartLine2.render();
+
+var optionsArea = {
+  series: [{
+    data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+      min: 10,
+      max: 60
+    })
+  }],
+  chartd: {
+    id: 'yt',
+    group: 'social',
+    type: 'area',
+    height: 160
+  },
+  colors: ['#00E396']
+};
+
+var chartArea = new ApexCharts(document.querySelector("#chart-area"), optionsArea);
+chartArea.render();
+
+var optionsSmall = {
+  series: [{
+    data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+      min: 10,
+      max: 60
+    })
+  }],
+  chartd: {
+    id: 'ig',
+    group: 'social',
+    type: 'area',
+    height: 160,
+    width: 300
+  },
+  colors: ['#008FFB']
+};
+
+var chartSmall = new ApexCharts(document.querySelector("#chart-small"), optionsSmall);
+chartSmall.render();
+
+var optionsSmall2 = {
+  series: [{
+    data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+      min: 10,
+      max: 60
+    })
+  }],
+  chart: {
+    id: 'li',
+    group: 'social',
+    type: 'area',
+    height: 160,
+    width: 300
+  },
+  colors: ['#546E7A']
+};
+
+var chartSmall2 = new ApexCharts(document.querySelector("#chart-small2"), optionsSmall2);
+chartSmall2.render();
+
+  
+</script>
+{% endblock javascripts %}

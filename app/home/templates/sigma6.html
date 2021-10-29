@@ -1,0 +1,353 @@
+
+<body>
+<div id="singles"></div>
+<div id="defects"></div>
+<div id="multi"></div>
+<!-- load the d3.js library -->    	
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// parse the date / time
+var parseTime = d3.timeParse("%m/%d/%Y %H:%M");
+
+// var color = d3.scale.ordinal(d3.schemeCategory10);
+//var color = d3.scale.category10();
+
+//singles chart
+// set the ranges
+var xSingle = d3.scaleTime().range([0, width]);
+var ySingle = d3.scaleLinear().range([height, 0]);
+// define the line
+var singleValueline = d3.line()
+    .x(function(d) { return xSingle(d.date); })
+    .y(function(d) { return ySingle(d.singles); });
+
+// append the svg obgect to the body of the page
+// appends a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svg = d3.select("#singles").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+		  
+
+//defects chart
+var xDefects = d3.scaleTime().range([0, width]);
+var yDefects = d3.scaleLinear().range([height, 0]);
+// define the line
+var defectsValueline = d3.line()
+    .x(function(d) { return xDefects(d.date); })
+    .y(function(d) { return yDefects(d.defects); });
+
+// append the svg obgect to the body of the page
+// appends a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svgDefects = d3.select("#defects").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+		  
+
+//Multi chart
+var xMulti = d3.scaleTime().range([0, width]);
+var yMulti = d3.scaleLinear().range([height, 0]);
+// define the line
+var multiValueline = d3.line()
+    .x(function(d) { return xMulti(d.date); })
+    .y(function(d) { return yMulti(d.multis); });
+
+// append the svg obgect to the body of the page
+// appends a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svgMulti = d3.select("#multi").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+    
+// Get the data
+
+
+$(document).ready(function () {
+  var data  = JSON.parse('{{rd.get('data') | safe}}');
+
+  // format the dat
+  Object.keys(data).forEach(function(d) {
+      d.date = parseTime(d.date);
+      d.singles = +d.singles;
+	  d.defects = +d.defects;
+	  d.multis = +d.multis;
+  });
+  //singles
+  // Scale the range of the data
+  xSingle.domain(d3.extent(data, function(d) { return d.date; }));
+  ySingle.domain([
+      (Math.floor(d3.min(data, function(d) { return d.singles; }) / 10) * 10),
+      (Math.ceil(d3.max(data, function(d) { return d.singles; }) / 10) * 10)
+    ]);
+
+  // Add the X Axis
+  svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xSingle));
+
+  // Add the Y Axis
+  svg.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3.axisLeft(ySingle))
+    	.append("text")
+        .attr("class", "axis-title")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 15)
+        .attr("dy", ".71em")
+        .text("Singles");
+		
+	// lower cut off line and text group
+	var lowerSingleCutOffValue = Math.floor(d3.min(data, function(d) { return d.singles; }) / 10) * 10;
+  	var lowerSingleCutOffLineAndText = svg.append("g")
+        .attr("class", "clinical-cut-off-line-and-text")
+    // lower cut off line
+    lowerSingleCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", ySingle(lowerSingleCutOffValue+5))
+        .attr("x2", width)
+        .attr("y2", ySingle(lowerSingleCutOffValue+5)); 
+    // lower cut off text
+    lowerSingleCutOffLineAndText.append("text")
+        .attr("class", "clinical-cut-off-text")
+        .attr("y", ySingle(lowerSingleCutOffValue+5))
+        .attr("dy","20px")
+        .text("Lower");	
+
+	// upper cut off line and text group
+	var upperSingleCutOffValue = Math.ceil(d3.max(data, function(d) { return d.singles; }) / 10) * 10;
+  	var upperSingleCutOffLineAndText = svg.append("g")
+        .attr("class", "clinical-cut-off-line-and-text")
+    // upper cut off line
+    upperSingleCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", ySingle(upperSingleCutOffValue-5))
+        .attr("x2", width)
+        .attr("y2", ySingle(upperSingleCutOffValue-5));
+		
+	 // upper cut off line
+    upperSingleCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", ySingle(upperSingleCutOffValue-5))
+        .attr("x2", width)
+        .attr("y2", ySingle(upperSingleCutOffValue-5)); 
+    // Upper cut off text
+    upperSingleCutOffLineAndText.append("text")
+        .attr("class", "clinical-cut-off-text")
+        .attr("y", ySingle(upperSingleCutOffValue-5))
+        .attr("dy","20px")
+        .text("Upper");	
+		
+	// Data line and dots group
+    var lineSingleAndDots = svg.append("g")
+    		.attr("class", "line-and-dots")
+        .attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+    // Data line
+    lineSingleAndDots.append("path")
+        .datum(data)
+        .attr("class", "data-line")
+        .attr("d", singleValueline);
+    // Data dots
+    lineSingleAndDots.selectAll("line-circle")
+    		.data(data)
+    	.enter().append("circle")
+        .attr("class", "data-circle")
+        .attr("r", 5)
+        .attr("cx", function(d) { return xSingle(d.date); })
+        .attr("cy", function(d) { return ySingle(d.singles); });
+		
+		
+	//defects
+	// Scale the range of the data
+  xDefects.domain(d3.extent(data, function(d) { return d.date; }));
+  yDefects.domain([
+      (Math.floor(d3.min(data, function(d) { return d.defects; }) / 10) * 10),
+      (Math.ceil(d3.max(data, function(d) { return d.defects; }) / 10) * 10)
+    ]);
+
+  // Add the X Axis
+  svgDefects.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xDefects));
+
+  // Add the Y Axis
+  svgDefects.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3.axisLeft(yDefects))
+    	.append("text")
+        .attr("class", "axis-title")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 15)
+        .attr("dy", ".71em")
+        .text("Defects");
+		
+	// lower cut off line and text group
+	var lowerDefectsCutOffValue = Math.floor(d3.min(data, function(d) { return d.defects; }) / 10) * 10;
+  	var lowerDefectsCutOffLineAndText = svgDefects.append("g")
+        .attr("class", "clinical-cut-off-line-and-text")
+    // lower cut off line
+    lowerDefectsCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", yDefects(lowerDefectsCutOffValue+5))
+        .attr("x2", width)
+        .attr("y2", yDefects(lowerDefectsCutOffValue+5)); 
+    // lower cut off text
+    lowerDefectsCutOffLineAndText.append("text")
+        .attr("class", "clinical-cut-off-text")
+        .attr("y", yDefects(lowerDefectsCutOffValue+5))
+        .attr("dy","20px")
+        .text("Lower");	
+
+	// upper cut off line and text group
+	var upperDefectsCutOffValue = Math.ceil(d3.max(data, function(d) { return d.defects; }) / 10) * 10;
+  	var upperDefectsCutOffLineAndText = svgDefects.append("g")
+        .attr("class", "clinical-cut-off-line-and-text")
+    // upper cut off line
+    upperDefectsCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", yDefects(upperDefectsCutOffValue-5))
+        .attr("x2", width)
+        .attr("y2", yDefects(upperDefectsCutOffValue-5));
+		
+	 // upper cut off line
+    upperDefectsCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", yDefects(upperDefectsCutOffValue-5))
+        .attr("x2", width)
+        .attr("y2", yDefects(upperDefectsCutOffValue-5)); 
+    // Upper cut off text
+    upperDefectsCutOffLineAndText.append("text")
+        .attr("class", "clinical-cut-off-text")
+        .attr("y", yDefects(upperDefectsCutOffValue-5))
+        .attr("dy","20px")
+        .text("Upper");	
+		
+	// Data line and dots group
+    var lineDefectsAndDots = svgDefects.append("g")
+    		.attr("class", "line-and-dots")
+        .attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+    // Data line
+    lineDefectsAndDots.append("path")
+        .datum(data)
+        .attr("class", "defect-data-line")
+        .attr("d", defectsValueline);
+    // Data dots
+    lineDefectsAndDots.selectAll("line-circle")
+    		.data(data)
+    	.enter().append("circle")
+        .attr("class", "defect-data-circle")
+        .attr("r", 5)
+        .attr("cx", function(d) { return xDefects(d.date); })
+        .attr("cy", function(d) { return yDefects(d.defects); });
+		
+	//Multi
+	// Scale the range of the data
+  xMulti.domain(d3.extent(data, function(d) { return d.date; }));
+  yMulti.domain([
+      (Math.floor(d3.min(data, function(d) { return d.multis; }) / 10) * 10),
+      (Math.ceil(d3.max(data, function(d) { return d.multis; }) / 10) * 10)
+    ]);
+
+  // Add the X Axis
+  svgMulti.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xMulti));
+
+  // Add the Y Axis
+  svgMulti.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3.axisLeft(yMulti))
+    	.append("text")
+        .attr("class", "axis-title")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 15)
+        .attr("dy", ".71em")
+        .text("Multis");
+		
+	// lower cut off line and text group
+	var lowerMultiCutOffValue = Math.floor(d3.min(data, function(d) { return d.multis; }) / 10) * 10;
+  	var lowerMultiCutOffLineAndText = svgMulti.append("g")
+        .attr("class", "clinical-cut-off-line-and-text")
+    // lower cut off line
+    lowerMultiCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", yMulti(lowerMultiCutOffValue+5))
+        .attr("x2", width)
+        .attr("y2", yMulti(lowerMultiCutOffValue+5)); 
+    // lower cut off text
+    lowerMultiCutOffLineAndText.append("text")
+        .attr("class", "clinical-cut-off-text")
+        .attr("y", yMulti(lowerMultiCutOffValue+5))
+        .attr("dy","20px")
+        .text("Lower");	
+
+	// upper cut off line and text group
+	var upperMultiCutOffValue = Math.ceil(d3.max(data, function(d) { return d.multis; }) / 10) * 10;
+  	var upperMultiCutOffLineAndText = svgMulti.append("g")
+        .attr("class", "clinical-cut-off-line-and-text")
+    // upper cut off line
+    upperMultiCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", yMulti(upperMultiCutOffValue-5))
+        .attr("x2", width)
+        .attr("y2", yMulti(upperMultiCutOffValue-5));
+		
+	 // upper cut off line
+    upperMultiCutOffLineAndText.append("line")
+        .attr("class", "clinical-cut-off-line")
+        .attr("x1", 0)
+        .attr("y1", yMulti(upperMultiCutOffValue-5))
+        .attr("x2", width)
+        .attr("y2", yMulti(upperMultiCutOffValue-5)); 
+    // Upper cut off text
+    upperMultiCutOffLineAndText.append("text")
+        .attr("class", "clinical-cut-off-text")
+        .attr("y", yMulti(upperMultiCutOffValue-5))
+        .attr("dy","20px")
+        .text("Upper");	
+		
+	// Data line and dots group
+    var lineMultiAndDots = svgMulti.append("g")
+    		.attr("class", "line-and-dots")
+        .attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+    // Data line
+    lineMultiAndDots.append("path")
+        .datum(data)
+        .attr("class", "defect-data-line")
+        .attr("d", multiValueline);
+    // Data dots
+    lineMultiAndDots.selectAll("line-circle")
+    		.data(data)
+    	.enter().append("circle")
+        .attr("class", "defect-data-circle")
+        .attr("r", 5)
+        .attr("cx", function(d) { return xMulti(d.date); })
+        .attr("cy", function(d) { return yMulti(d.multis); });
+});
+
+
+</script>
+</body>

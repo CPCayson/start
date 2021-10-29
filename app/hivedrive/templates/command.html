@@ -1,0 +1,37 @@
+
+    <div class="container-fluid">
+
+  
+   <div id = "pops"></div>
+</div>
+
+</div>
+</div>
+
+
+<script>
+$('#q').append('<p color="black">q1</p>')
+$(document).on('click', '.sw', function(){
+
+for (let i = 0; i < 5; i++) { 
+  const a = ['{{rd.get('q1')[0]}}', '{{rd.get('q1')[1]}}', '{{rd.get('q1')[2]}}', '{{rd.get('q1')[3]}}', '{{rd.get('q1')[4]}}']
+
+$('#pops').append(`
+
+<div class="Message">
+  <div class="Message-icon">
+    <i class="fa fa-bell-o"></i>
+  </div>
+  <div class="Message-body">
+    <p>` + a[i] +   
+        `</p>
+    <button class="Message-button" id="js-showMe">Show me how</button>
+    <button class="Message-button js-messageClose">Nah, not interested</button>
+  </div>
+  <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+</div>`
+)
+}
+})
+
+</script>

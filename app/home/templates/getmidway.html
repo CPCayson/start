@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+
+
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+</style>
+
+     
+{% endblock stylesheets %}
+    
+{% block content %}
+<body>
+  <iframe src="https://www.google.com/maps/embed?pb=!4v1631069032686!6m8!1m7!1sb3CDWDzw5ezAZXHZux9nhw!2m2!1d34.98607695376791!2d-89.59661035769243!3f0.4504494101495684!4f6.360593822553639!5f1.9587109090973311" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+    
+</body>
+
+{% endblock %} 
+
+
+{% block javascripts %}
+<script>
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Midway is not enabled',
+  html: 'To use our super sweet features click' + ' <a href="https://midway-auth.amazon.com/login?next=%2F#midway"> here </a> ' + 'while following directions below:' +
+        '<img src="/static/assets/midway.png">',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, tis\'\ done!',
+  cancelButtonText: 'No, cancel',
+  reverseButtons: true,
+ 
+  backdrop: `
+    rgba(0,0,123,0.4)
+    url("https://sweetalert2.github.io/images/nyan-cat.gif")
+    left top
+    no-repeat
+  `
+}).then((result) => {
+  if (result.isConfirmed) {
+    swalWithBootstrapButtons.fire(
+      'WOHOOOOO'
+    ).then(function(){
+      window.location="clock"
+    }
+  )} else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Its chill',
+      'No abandonment issues here ... see you soon!'
+    )
+  }
+})
+
+</script>
+    
+{% endblock javascripts %}

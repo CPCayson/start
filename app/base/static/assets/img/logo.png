@@ -1,0 +1,52 @@
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Hive Drive</button>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Colored with scrolling</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div id = "q"></div>
+
+    <h1 id="countdown"></h1>
+    <h1>cpt:    quality:    TPH:</h1>
+    <button class="btn btn-primary sw" type="button" data-bs-toggle="" data-bs-target="#" aria-controls="">Enable </button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="" data-bs-target="#" aria-controls=""> Chat </button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="" data-bs-target="#" aria-controls="">Events</button>
+
+    <div class="container-fluid">
+
+  
+   <div id = "pops"></div>
+</div>
+
+</div>
+</div>
+
+
+<script>
+$('#q').append('<p color="black">q1</p>')
+$(document).on('click', '.sw', function(){
+
+for (let i = 0; i < 5; i++) { 
+  const a = ['{{rd.get('q1')[0]}}', '{{rd.get('q1')[1]}}', '{{rd.get('q1')[2]}}', '{{rd.get('q1')[3]}}', '{{rd.get('q1')[4]}}']
+
+$('#pops').append(`
+
+<div class="Message">
+  <div class="Message-icon">
+    <i class="fa fa-bell-o"></i>
+  </div>
+  <div class="Message-body">
+    <p>` + a[i] +   
+        `</p>
+    <button class="Message-button" id="js-showMe">Show me how</button>
+    <button class="Message-button js-messageClose">Nah, not interested</button>
+  </div>
+  <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+</div>`
+)
+}
+})
+
+</script>

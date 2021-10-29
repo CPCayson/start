@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "opacity.css",
+	"sources": [
+		"../../../../scss/black-dashboard/custom/mixins/opacity.scss"
+	],
+	"sourcesContent": [
+		"// Opacity\n\n@mixin opacity($opacity) {\n  opacity: $opacity;\n  // IE8 filter\n  $opacity-ie: ($opacity * 100);\n  filter: #{alpha(opacity=$opacity-ie)};\n}\n"
+	],
+	"names": [],
+	"mappings": ""
+}
