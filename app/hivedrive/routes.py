@@ -1,5 +1,4 @@
 from app.hivedrive import blueprint
-from app.retry import requests_retry_session
 from flask import render_template, request
 from flask_babel import _
 import redis

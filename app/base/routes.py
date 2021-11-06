@@ -1,5 +1,5 @@
 
-from requests_kerberos import HTTPKerberosAuth, OPTIONAL
+
 import requests
 from flask import jsonify, render_template, redirect, request, url_for, flash
 from flask_login import (
